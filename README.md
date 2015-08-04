@@ -32,4 +32,20 @@ demo_images.json
 
 This will spin up GCE VMs, run the scripts to get the GRR client installed, and plant some interesting artifacts to find. The VMs are then torn down and are available in GCE under Images. Importantly we make sure to remove the local client config so it will re-enroll when the VM instance is created, so we don't get clients with the same ID installed on multiple machines.
 
+## Create the client VM instances
+
+```
+bash create_instances.sh
+```
+## Configure the windows clients
+
+Unfortunately packer doesn't play well with the stock GCE windows machines.
+Packer needs ssh, which you achieve by creating your own VM image with a ssh
+server.  But at that point you might as well just run the install script. So RDP
+to the two windows machines and run the `prepare_windows.bat` commands in an
+admin shell.
+
+## Check you have all the clients
+
+In the server hit enter in the search box and you should see 7 clients.
 

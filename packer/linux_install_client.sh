@@ -12,7 +12,10 @@ elif [[ ${GRR_RPMURL} ]]; then
   sudo rpm -i ${PKG}
 fi
 
-# Force re-enroll on start.
+# Delete local config to force a re-enroll.
 sudo service grr stop || true
 sudo /etc/init.d/grr stop || true
+
+# Workaround bug in grr debian postinst that doesn't set the right runlevels
+sudo update-rc.d grr defaults || true
 sudo rm -f /etc/grr.local.yaml || true
