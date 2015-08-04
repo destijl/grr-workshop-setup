@@ -45,6 +45,16 @@ server.  But at that point you might as well just run the install script. So RDP
 to the two windows machines and run the `prepare_windows.bat` commands in an
 admin shell.
 
+You can download the script with this:
+```
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "(new-object System.Net.WebClient).DownloadFile('https://googledrive.com/host/0B1wsLqFoT7i2fjI5TjYtUGZuVTBCTVNYWGpsNjZnc0tQLWROWW91WHlaaWV2YVprN2NOSEE/prepare_windows.bat', 'prepare_windows.bat')"
+```
+Edit the URL in the script to point at your client, then:
+
+```
+prepare_windows.bat
+```
+
 ## Check you have all the clients
 
 In the server hit enter in the search box and you should see 7 clients.
