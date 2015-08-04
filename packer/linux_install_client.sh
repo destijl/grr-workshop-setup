@@ -4,14 +4,15 @@ set -e
 if [[ ${GRR_DEBURL} ]]; then
   PKG=$(basename ${GRR_DEBURL})
   wget --quiet ${GRR_DEBURL}
-  dpkg --install ${PKG}
+  sudo dpkg --install ${PKG}
 elif [[ ${GRR_RPMURL} ]]; then
   PKG=$(basename ${GRR_RPMURL})
+  sudo yum install -y wget
   wget --quiet ${GRR_RPMURL}
-  rpm -i ${PKG}
+  sudo rpm -i ${PKG}
 fi
 
 # Force re-enroll on start.
-service grr stop || true
-/etc/init.d/grr stop || true
-rm -f /etc/grr.local.yaml || true
+sudo service grr stop || true
+sudo /etc/init.d/grr stop || true
+sudo rm -f /etc/grr.local.yaml || true
