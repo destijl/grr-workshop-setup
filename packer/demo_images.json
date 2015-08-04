@@ -1,0 +1,106 @@
+{
+  "variables": {
+    "exe_url": null,
+    "deb_url": null,
+    "rpm_url": null,
+    "project_id": null
+  },
+  "builders": [
+    {
+      "name": "debian-wheezy",
+      "type": "googlecompute",
+      "account_file": "account.json",
+      "project_id": "{{user `project_id`}}",
+      "source_image": "backports-debian-7-wheezy-v20150710",
+      "zone": "us-central1-f",
+      "instance_name": "grrdemo-debian-wheezy",
+      "image_name": "grrdemo-debian-wheezy-{{timestamp}}",
+      "machine_type": "n1-standard-1"
+    },
+    {
+      "name": "ubuntu-trusty",
+      "type": "googlecompute",
+      "account_file": "account.json",
+      "project_id": "{{user `project_id`}}",
+      "source_image": "ubuntu-1404-trusty-v20150625",
+      "zone": "us-central1-f",
+      "instance_name": "grrdemo-ubuntu-trusty",
+      "image_name": "grrdemo-ubuntu-trusty-{{timestamp}}",
+      "machine_type": "n1-standard-1"
+    },
+    {
+      "name": "ubuntu-trusty-malware",
+      "type": "googlecompute",
+      "account_file": "account.json",
+      "project_id": "{{user `project_id`}}",
+      "source_image": "ubuntu-1404-trusty-v20150625",
+      "zone": "us-central1-f",
+      "instance_name": "grrdemo-ubuntu-trusty-m",
+      "image_name": "grrdemo-ubuntu-trusty-m-{{timestamp}}",
+      "machine_type": "n1-standard-1"
+    },
+    {
+      "name": "rhel-7.1",
+      "type": "googlecompute",
+      "account_file": "account.json",
+      "project_id": "{{user `project_id`}}",
+      "source_image": "rhel-7-v20150710",
+      "zone": "us-central1-f",
+      "instance_name": "grrdemo-rhel-7",
+      "image_name": "grrdemo-rhel-7-{{timestamp}}",
+      "machine_type": "n1-standard-1",
+      "ssh_username": "gladstone"
+    },
+    {
+      "name": "debian-wheezy-malware",
+      "type": "googlecompute",
+      "account_file": "account.json",
+      "project_id": "{{user `project_id`}}",
+      "source_image": "backports-debian-7-wheezy-v20150710",
+      "zone": "us-central1-f",
+      "instance_name": "grrdemo-debian-wheezy-m",
+      "image_name": "grrdemo-debian-wheezy-m-{{timestamp}}",
+      "machine_type": "n1-standard-1"
+    }
+
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "malware_cronjob",
+      "destination": "/etc/cron.hourly/sysupdate",
+      "only": ["debian-wheezy-malware"]
+    },
+    {
+      "type": "shell",
+      "inline": ["sudo chmod a+x /etc/cron.hourly/sysupdate"],
+      "only": ["debian-wheezy-malware"]
+    },
+    {
+      "type": "file",
+      "source": "malware_cronjob",
+      "destination": "/etc/cron.hourly/ntpq",
+      "only": ["ubuntu-trusty-malware"]
+    },
+    {
+      "type": "shell",
+      "inline": ["sudo chmod a+x /etc/cron.hourly/ntpq"],
+      "only": ["ubuntu-trusty-malware"]
+    },
+    {
+      "type": "shell",
+      "inline": ["sudo /usr/sbin/useradd -d /home/lenarhoyt -m lenarhoyt", "sudo /usr/sbin/useradd -d /home/fkassad -m fkassad"]
+    },
+    {
+      "type": "shell",
+      "script": "linux_install_client.sh",
+      "environment_vars": ["GRR_RPMURL={{user `rpm_url`}}"],
+      "only": ["rhel-7.1"]
+    },
+    {
+      "type": "shell",
+      "script": "linux_install_client.sh",
+      "environment_vars": ["GRR_DEBURL={{user `deb_url`}}"]
+    }
+  ]
+}

@@ -22,10 +22,14 @@ Create a service account and download the key from the [GCE console](https://con
 
 ```
 cd packer
-/usr/local/bin/packer/packer build -var 'rpm_url=https://someurl/grr_3.0.0.7_amd64.rpm' \
+/usr/local/bin/packer/packer build \
+-var 'rpm_url=https://someurl/grr_3.0.0.7_amd64.rpm' \
 -var 'deb_url=https://someurl/grr_3.0.0.7_amd64.deb' \
--var 'exe_url=https://soemurl/GRR_3.0.0.7_amd64.exe' demo_images.json
+-var 'exe_url=https://soemurl/GRR_3.0.0.7_amd64.exe' \
+-var 'project_id=YOUR_GCE_PROJECT_ID' \
+demo_images.json
 ```
+
 This will spin up GCE VMs, run the scripts to get the GRR client installed, and plant some interesting artifacts to find. The VMs are then torn down and are available in GCE under Images. Importantly we make sure to remove the local client config so it will re-enroll when the VM instance is created, so we don't get clients with the same ID installed on multiple machines.
 
 
