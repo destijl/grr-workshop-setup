@@ -73,6 +73,11 @@
     },
     {
       "type": "shell",
+      "inline": ["sudo /usr/sbin/useradd -d /home/joe -m joe"],
+      "only": ["debian-wheezy"]
+    },
+    {
+      "type": "shell",
       "inline": ["sudo chmod a+x /etc/cron.hourly/sysupdate"],
       "only": ["debian-wheezy-malware"]
     },
