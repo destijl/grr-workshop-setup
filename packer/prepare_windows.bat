@@ -1,8 +1,11 @@
 :: Install GRR on next boot.
-:: Download this script:
 
 ::powershell -NoProfile -ExecutionPolicy unrestricted -Command "(new-object System.Net.WebClient).DownloadFile('%GRR_EXEURL%', 'C:\Windows\System32\grr_install.exe')"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(new-object System.Net.WebClient).DownloadFile('https://googledrive.com/host/0B1wsLqFoT7i2fjI5TjYtUGZuVTBCTVNYWGpsNjZnc0tQLWROWW91WHlaaWV2YVprN2NOSEE/GRR_3.0.0.7_amd64.exe', 'C:\Windows\System32\grr_install.exe')"
+
+:: Add fastpoll settings.
+REG ADD HKEY_LOCAL_MACHINE\Software\GRR /f /v Client.poll_max /t REG_SZ /d "5"
+REG ADD HKEY_LOCAL_MACHINE\Software\GRR /f /v Client.foreman_check_frequency /t REG_SZ /d "20"
 
 C:\Windows\System32\grr_install.exe
 

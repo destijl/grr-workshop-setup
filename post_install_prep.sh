@@ -11,8 +11,8 @@ gcloud compute ssh client-ubuntu-trusty-m -- 'echo "export LD_PRELOAD=/usr/share
 # Create users
 gcloud compute ssh grr-demo -- 'sudo grr_console --command_file /tmp/create_users.py'
 
-# Should probably change packer scripts to pull out the key to force re-enroll
-# then add these fastpoll settings.
+# Should probably change packer scripts to remove the key from config (instead
+# of just deleting to force re-enroll) then add these fastpoll settings.
 put_clients_into_fastpoll() {
   for client in $1; do
     echo ${client}

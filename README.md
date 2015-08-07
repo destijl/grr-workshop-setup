@@ -59,3 +59,11 @@ prepare_windows.bat
 
 In the server hit enter in the search box and you should see 7 clients.
 
+## Run Post Install
+
+This will finish planting some of the evidence, put clients into fastpoll, and
+run a flow.
+
+```
+bash post_install_prep.sh
+```
