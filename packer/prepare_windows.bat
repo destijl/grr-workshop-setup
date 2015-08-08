@@ -23,6 +23,8 @@ mkdir %HOMEPATH%\Downloads
 
 REG ADD HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run /f /v nwiz_auth /t REG_SZ /d "rundll32.exe C:\Temp\authz.dll"
 
+REG ADD HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run /f /v keepinitreal /t REG_SZ /d "echo most windows machines aren't this boring"
+
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(new-object System.Net.WebClient).DownloadFile('https://googledrive.com/host/0B1wsLqFoT7i2fjI5TjYtUGZuVTBCTVNYWGpsNjZnc0tQLWROWW91WHlaaWV2YVprN2NOSEE/TA_Toolkit_Implementation_Plan_Template.doc', '%HOMEPATH%\Downloads\TA_Toolkit_Implementation_Plan_Template.doc')"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(new-object System.Net.WebClient).DownloadFile('https://googledrive.com/host/0B1wsLqFoT7i2fjI5TjYtUGZuVTBCTVNYWGpsNjZnc0tQLWROWW91WHlaaWV2YVprN2NOSEE/Multi_PIs_NSF.doc', '%HOMEPATH%\Downloads\Multi_PIs_NSF.doc')"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(new-object System.Net.WebClient).DownloadFile('https://googledrive.com/host/0B1wsLqFoT7i2fjI5TjYtUGZuVTBCTVNYWGpsNjZnc0tQLWROWW91WHlaaWV2YVprN2NOSEE/lpc_sapp.doc', '%HOMEPATH%\Downloads\lpc_sapp.doc')"
