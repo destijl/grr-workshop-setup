@@ -67,3 +67,12 @@ run a flow.
 ```
 bash post_install_prep.sh
 ```
+
+# Cleanup
+
+If you need to cleanup the test hunts and flows you ran getting the workshop
+ready, run:
+
+```
+bash clear_hunts_and_flows.sh
+```
