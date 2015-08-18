@@ -6,7 +6,7 @@ You'll need a Google compute engine account for running the clients and the serv
 
 ## Create the server
 
-Create a reasonably high-powered Ubuntu trusty VM for the GRR server (I used n1-standard-8). Install the server using the [quickstart instructions](https://github.com/google/grr-doc/blob/master/quickstart.adoc). If you have a domain name for the demo server make sure to use it in the settings prompts.
+Create a high-powered Ubuntu trusty VM for the GRR server (like n1-standard-16 with SSD disk). Install the server using the [quickstart instructions](https://github.com/google/grr-doc/blob/master/quickstart.adoc). If you have a domain name for the demo server make sure to use it in the settings prompts.
 
 ## Download and host the clients
 
